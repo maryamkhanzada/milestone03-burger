@@ -3,7 +3,6 @@
 'use client';
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 import ProductCard from "./Productcard";
 import { Product } from "@/pages/types";
@@ -14,7 +13,7 @@ const Home = () => {
     const [cart, setCart] = useState<Product[]>([]);
     const [showCart, setShowCart] = useState(false);
     const [isCheckout, setIsCheckout] = useState(false);
-    const router = useRouter();
+    
 
     useEffect(() => {
         async function fetchProducts() {
