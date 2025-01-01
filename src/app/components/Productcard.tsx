@@ -1,4 +1,5 @@
-import { Product} from "../pages/api/types/types";
+import { Product } from './types';
+
 import React from 'react';
 
 

@@ -1,11 +1,9 @@
-
-
- 'use client';
+'use client';
  import Image from "next/image";
  import { useState, useEffect } from "react";
 
  import ProductCard from "./Productcard";
- import { Product } from "../pages/api/types/types";
+ import { Product } from "./types";  
 
 
 
@@ -23,7 +21,7 @@
             const response = await fetch("/api/product");
             const data = await response.json();
             setProducts(data);
-             console.log(data)
+             
          }
 
        fetchProducts();
@@ -182,3 +180,4 @@
 
  export default Home;
   
+

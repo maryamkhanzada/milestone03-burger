@@ -10,7 +10,9 @@ import Card from "./components/Card";
 
 import Reservation from "./components/Reservation";
 import Footer from "./components/Footer";
-import Home from "./components/Menuitem";
+
+import MenuItems from "./components/Menuitem";
+
 
 
 
@@ -23,7 +25,7 @@ export default function App() {
                <Carousel/> 
                <Progressor/>
                <Product/> 
-              <Home/>
+              <MenuItems/>
               <Banner/> 
               <Burger/>
                 <Offer/>
