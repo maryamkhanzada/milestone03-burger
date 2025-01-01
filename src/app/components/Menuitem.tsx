@@ -1,53 +1,56 @@
 
 
-'use client';
-import Image from "next/image";
-import { useState, useEffect } from "react";
+ 'use client';
+ import Image from "next/image";
+ import { useState, useEffect } from "react";
 
-import ProductCard from "./Productcard";
-import { Product } from "@/pages/types";
+ import ProductCard from "./Productcard";
+ import { Product } from "../pages/api/types/types";
 
-const Home = () => {
-    const [products, setProducts] = useState<Product[]>([]);
+
+
+
+ const Home = () => {
+     const [products, setProducts] = useState<Product[]>([]);
     
-    const [cart, setCart] = useState<Product[]>([]);
+   const [cart, setCart] = useState<Product[]>([]);
     const [showCart, setShowCart] = useState(false);
     const [isCheckout, setIsCheckout] = useState(false);
     
 
-    useEffect(() => {
+   useEffect(() => {
         async function fetchProducts() {
             const response = await fetch("/api/product");
             const data = await response.json();
             setProducts(data);
-            console.log(data)
-        }
+             console.log(data)
+         }
 
-        fetchProducts();
+       fetchProducts();
 
         const savedCart = localStorage.getItem("cart");
         if (savedCart) {
             setCart(JSON.parse(savedCart));
         }
-    }, []);
+   }, []);
 
     const addToCart = (product: Product) => {
         setCart((prevCart) => {
             const updatedCart = [...prevCart, product];
-            localStorage.setItem("cart", JSON.stringify(updatedCart));
-            return updatedCart;
-        });
-    };
+             localStorage.setItem("cart", JSON.stringify(updatedCart));
+             return updatedCart;
+         });
+     };
 
-    const toggleCart = () => {
+     const toggleCart = () => {
         setShowCart((prev) => !prev);
     };
 
     const goToCheckout = () => {
-        setIsCheckout(true);
-    };
+         setIsCheckout(true);
+     };
 
-    const clearCart = () => {
+     const clearCart = () => {
         setCart([]);
         localStorage.removeItem("cart");
     };
@@ -87,7 +90,7 @@ const Home = () => {
                             {cart.length > 0 ? (
                                 <div>
                                     <ul>
-                                        {cart.map((product, index) => (
+                                        {cart.map((product, index) => ( 
                                             <li
                                                 key={index}
                                                 className="flex items-center justify-start mb-6"
@@ -141,40 +144,41 @@ const Home = () => {
                             <p className="text-lg text-red-600">Please confirm your order before proceeding.</p>
                             <div className="mt-4">
                                 <ul>
-                                    {cart.map((product, index) => (
+                                     {cart.map((product, index) => (
                                         <li key={index} className="flex justify-between mb-4">
                                             <span>{product.name}</span>
-                                            <span>${product.price}</span>
-                                        </li>
-                                    ))}
-                                </ul>
+                                             <span>${product.price}</span>
+                                         </li>
+                                     ))}
+                                 </ul>
                                 <div className="flex justify-between mb-4">
-                                    <span className="font-semibold">Total:</span>
+                                     <span className="font-semibold">Total:</span>
                                     <span className="font-semibold">
                                         ${cart.reduce((total, product) => total + product.price, 0)}
                                     </span>
-                                </div>
+                                 </div>
                             </div>
                             <div className="mt-6 flex justify-between">
                                 <button
-                                    onClick={() => setIsCheckout(false)}
+                                     onClick={() => setIsCheckout(false)}
                                     className="bg-slate-600 text-white py-2 px-6 rounded-lg text-lg shadow-md hover:bg-slate-700 transition duration-300"
-                                >
-                                    Close
+                               >
+                                   Close
                                 </button>
                                 <button
                                     onClick={() => alert("Order Confirmed! Will be delivered to your doorstep.")}
                                     className="bg-green-600 text-white py-2 px-6 rounded-lg text-lg shadow-md hover:bg-green-700 transition duration-300"
-                                >
+                                 >
                                     Confirm Order
                                 </button>
-                            </div>
-                        </div>
+                             </div>
+                         </div>
                     </div>
                 )}
             </div>
         </div>
-    );
-};
+     );
+ };
 
-export default Home;
+ export default Home;
+  
